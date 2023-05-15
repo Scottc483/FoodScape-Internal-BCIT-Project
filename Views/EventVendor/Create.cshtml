@@ -1,0 +1,60 @@
+﻿@model Food_Scape.Models.EventVendor
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="h-100 d-flex align-items-center">
+    <div class="col-3 mx-auto">
+        <h1 class="text-center">Create Event</h1>
+        <hr />
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EventId" class="control-label"></label>
+                
+                @Html.DropDownList(
+                    "EventId",
+                    new SelectList(ViewBag.EventSelectList, 
+                        "Value",
+                        "Text"
+                    ),
+                    "Select Event",
+                    new { @id = "eventDD", @class = "form-control mb-3"}
+                )
+
+                <span asp-validation-for="EventId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VendorId" class="control-label"></label>
+
+                @Html.DropDownList(
+                    "VendorId",
+                    new SelectList(ViewBag.VendorSelectList, 
+                        "Value",
+                        "Text"
+                    ),
+                    "Select Vendor",
+                    new { @id = "vendorDD", @class = "form-control mb-3"}
+                )             
+                
+                <span asp-validation-for="VendorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+        <div>
+            <a asp-action="Index">Back to Event List</a>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

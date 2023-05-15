@@ -1,0 +1,53 @@
+﻿@model Food_Scape.Models.EventVendor
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="h-100 d-flex align-items-center">
+    <div class="col-11 mx-auto">
+        <h1 class="text-center">Delete Event Vendor</h1>
+        <h3 class="text-center">Are you sure you want to delete this?</h3>
+        <hr />
+        <dl class="col-sm-3 row mx-auto">
+            <dt class="col-sm-5">
+                Event Vendor ID
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.EventVendorId)
+            </dd>
+            <dt class="col-sm-5">
+                Event ID
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.EventId)
+            </dd>
+            <dt class="col-sm-5">
+                Event Name
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Event.Name)
+            </dd>
+            <dt class="col-sm-5">
+                Vendor ID
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.VendorId)
+            </dd>
+            <dt class="col-sm-5">
+                Vendor Name
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Vendor.Name)
+            </dd>
+
+        </dl>
+
+        <form asp-action="Delete">
+            <div class="col-sm-3 mx-auto d-flex flex-column justify-content-evenly align-items-center">
+                <input type="hidden" asp-for="EventVendorId" />
+                <input type="submit" value="Delete" class="btn btn-danger mb-3" />
+                <a asp-action="Index">Back to Event List</a>
+            </div>
+        </form>
+    </div>
+</div>

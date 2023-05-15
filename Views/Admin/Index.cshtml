@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Admin Page";
+}
+
+<div class="h-100 d-flex align-items-center">
+    <div class="mx-auto my-auto d-flex flex-column text-center justify-content-evenly">
+        <h1 class="mb-4">Admin Panel</h1>
+        
+        <a class="h4 btn-primary px-4 py-2 text-white text-decoration-none rounded-3 shadow-lg" asp-action="Index" asp-controller="User">Users</a>
+        <a class="h4 btn-primary px-4 py-2 text-white text-decoration-none rounded-3 shadow-lg" asp-action="AdminIndex" asp-controller="Vendor">Vendors</a>
+        <a class="h4 btn-primary px-4 py-2 text-white text-decoration-none rounded-3 shadow-lg" asp-action="Index" asp-controller="Event">Events</a>
+        <a class="h4 btn-primary px-4 py-2 text-white text-decoration-none rounded-3 shadow-lg" asp-action="Index" asp-controller="EventVendor">Event Vendors</a>
+        <a class="h4 btn-primary px-4 py-2 text-white text-decoration-none rounded-3 shadow-lg" asp-action="AdminIndex" asp-controller="TicketType">Ticket Types</a>
+        <a class="h4 btn-primary px-4 py-2 text-white text-decoration-none rounded-3 shadow-lg" asp-action="Index" asp-controller="Ticket">Tickets</a>
+        <a class="h4 btn-primary px-4 py-2 text-white text-decoration-none rounded-3 shadow-lg" asp-action="Index" asp-controller="Role">Roles</a>
+        <a class="h4 btn-primary px-4 py-2 text-white text-decoration-none rounded-3 shadow-lg" asp-action="Index" asp-controller="Transactions">Transactions</a>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+﻿@model Food_Scape.Models.Review
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h1>Edit</h1>
+
+    <h4>Review</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ReviewId" />
+                <div class="form-group">
+                    <input type="hidden" name="UserId" value="@Model.Review1" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Review1" class="control-label"></label>
+                    <input asp-for="Review1" class="form-control" value="@Model.Review1" />
+                    <span asp-validation-for="Review1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Rating" class="control-label"></label>
+                    <div class="rating-stars">
+                        <i class="far fa-star" data-value="1"></i>
+                        <i class="far fa-star" data-value="2"></i>
+                        <i class="far fa-star" data-value="3"></i>
+                        <i class="far fa-star" data-value="4"></i>
+                        <i class="far fa-star" data-value="5"></i>
+                    </div>
+                    <input type="hidden" name="Rating" id="Rating" value="@Model.Rating" />
+                    <span asp-validation-for="Rating" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            $(".rating-stars i").click(function () {
+                var star = $(this);
+                var rating = star.attr("data-value");
+                $("#Rating").val(rating);
+                star.siblings().removeClass("fas").addClass("far");
+                star.removeClass("far").addClass("fas").prevAll().removeClass("far").addClass("fas");
+                star.nextAll().removeClass("fas").addClass("far");
+            }).mousemove(function () {
+                var star = $(this);
+                star.addClass("fas").prevAll().addClass("fas");
+                star.nextAll().removeClass("fas").addClass("far");
+                star.removeClass("far");
+                $(this).parent().find(".rating-label").html(star.index() + 1);
+            }).mouseleave(function () {
+                var rating = $("#Rating").val();
+                if (rating) {
+                    var selectedStar = $(".rating-stars i[data-value='" + rating + "']");
+                    selectedStar.siblings().removeClass("fas").addClass("far");
+                    selectedStar.removeClass("far").addClass("fas").prevAll().removeClass("far").addClass("fas");
+                    selectedStar.nextAll().removeClass("fas").addClass("far");
+                } else {
+                    $(this).siblings().removeClass("fas").addClass("far");
+                    $(this).removeClass("fas").addClass("far");
+                }
+                $(this).parent().find(".rating-label").html(rating ? rating : "");
+            });
+            var rating = $("#Rating").val();
+            if (rating) {
+                var selectedStar = $(".rating-stars i[data-value='" + rating + "']");
+                selectedStar.siblings().removeClass("fas").addClass("far");
+                selectedStar.removeClass("far").addClass("fas").prevAll().removeClass("far").addClass("fas");
+                selectedStar.nextAll().removeClass("fas").addClass("far");
+            }
+        });
+
+    </script>
+}

@@ -1,0 +1,35 @@
+﻿/*
+
+    #385892
+
+*/
+
+body {
+    background-color: #F2F2F2;
+}
+
+
+.nav-pills .nav-link.active {
+    background-color: #1c2331;
+}
+
+.nav-link {
+    margin: 1.5rem 0 0 0;
+    font-size: 1.5rem;
+    color: #000000;
+}
+
+.nav-link:hover {
+    color: #f4b139ed;
+}
+
+#info-element{
+    max-width: 80%;
+}
+
+.card-header {
+    background-color: #1c2331;
+}
+
+#v-pills-tab {
+}

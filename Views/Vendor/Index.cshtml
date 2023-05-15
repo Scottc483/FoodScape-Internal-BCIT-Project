@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Food_Scape.ViewModels.VendorVM>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0" style="margin-bottom: 25px;">
+
+    <div class="row no-gutters">
+        <div class="col-md-12">
+            <img src="~/images/banners/Vendors.png" alt="Banner Image" class="w-100">
+        </div>
+    </div>
+</div>
+
+<!--Vendor Filters-->
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 text-center">
+    <form asp-action="Index" method="get" class="px-5">
+        <input type="submit" value="All" class="btn btn-dark" style="width: 200px" />
+    </form>
+    <form asp-action="Index" method="get" class="px-5">
+        <input type="hidden" name="SearchString" value="Food" />
+        <input type="submit" value="Food" class="btn btn-dark" style="width: 200px" />
+    </form>
+    <form asp-action="Index" method="get" class="px-5">
+        <input type="hidden" name="SearchString" value="Beverages"/>
+        <input type="submit" value="Beverages" class="btn btn-dark" style="width: 200px" />
+    </form>
+    <form asp-action="Index" method="get" class="px-5">
+        <input type="hidden" name="SearchString" value="Activity" />
+        <input type="submit" value="Activity" class="btn btn-dark" style="width: 200px" />
+    </form>
+</div>
+
+<!--List of vendors-->
+@if (Model != null && Model.Any())
+{
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center">
+        @foreach (var vendor in Model)
+        {
+            <div class="card" style="max-width: 400px; margin: 10px;">
+                <div class="card-img-top" style="height: 200px; overflow: hidden; text-align: center; padding-top: 15px;">
+                    <img src="@vendor.Vendor.ImageUrl" alt="@vendor.Vendor.Name" style="object-fit: cover; max-height: 100%; max-width: 100%; border-radius: 100%; box-shadow: 7px 0 5px lightgray;">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@vendor.Vendor.Name</h5>
+                    <p class="card-text">Description: @vendor.Vendor.Description</p>
+                    <p class="card-text">Type: @vendor.Vendor.VendorType</p>
+                    <span class="card-text">Events: </span>
+                    @{
+                        var i=0;
+                        var count = vendor.Events.Count();
+                    }
+                    @foreach(var ev in vendor.Events)
+                    {
+                        @if (++i == count)
+                        {
+                            <span class="card-text">@ev.Name</span>
+                        } 
+                        else
+                        {
+                            <span class="card-text">@ev.Name | </span>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <p>No vendors found</p>
+    </div>
+}

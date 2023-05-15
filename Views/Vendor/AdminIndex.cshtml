@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Food_Scape.Models.Vendor>
+@{
+    ViewData["Title"] = "AdminIndex";
+}
+
+<div class="h-100 d-flex align-items-center">
+    <div class="col-6 mx-auto">
+        @if (ViewBag.Message != "")
+        {
+            <h1 class="text-success text-center">@ViewBag.Message</h1>
+        }
+        @if (ViewBag.Error != "")
+        {
+            <h1 class="text-danger text-center">@ViewBag.Error</h1>
+        }
+        <h1 class="text-center">Vendors</h1>
+        <p class="text-center">
+            <a asp-action="Create" asp-controller="Vendor">Create New Vendor</a>
+        </p>
+        <form asp-action="AdminIndex" method="get" class="px-5">
+            <div class="form-actions no-color admin-searchBar d-flex flex-row justify-content-center align-items-center">
+                <div class="form-group align-items-center" style="display: inline-block">
+                    <span>Search Vendors:</span>
+                    <input type="text" name="SearchString"
+                           value="@ViewData["currentFilter"]" required />
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+                <a asp-action="AdminIndex" class="mx-4">Clear Search Bar</a>
+            </div>
+        </form>
+
+        <div class="admin-panel overflow-auto">
+            <table class="table table-bordered text-center table-striped shadow rounded">
+                <thead>
+                    <tr>
+                        <th>Vendor ID</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Location</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var vendor in Model)
+                    {
+                        <tr>
+                            <td>@vendor.VendorId</td>
+                            <td>@vendor.Name</td>
+                            <td>@vendor.VendorType</td>
+                            <td>@vendor.Location</td>
+                            <td>
+                                <a asp-action="Edit" asp-controller="Vendor" asp-route-id="@vendor.VendorId">Edit</a> |
+                                <a asp-action="Details" asp-controller="Vendor" asp-route-id="@vendor.VendorId">Details</a> |
+                                <a asp-action="Delete" asp-controller="Vendor" asp-route-id="@vendor.VendorId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="h4">
+        <a asp-action="Index" asp-controller="Admin">Back to Admin Panel</a>
+        </div>
+    </div>
+</div>
+
+
+

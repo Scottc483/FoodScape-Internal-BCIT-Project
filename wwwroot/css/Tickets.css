@@ -1,0 +1,201 @@
+﻿
+body {
+    background-image: url(../images/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+}
+/* Define the scrollbar styles */
+::-webkit-scrollbar {
+    width: 6px; /* set width of the scrollbar */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0,0.3);
+    background: #f1f1f1; /* set background color for the scrollbar track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; /* set color for the scrollbar handle */
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0,0.5);
+    border-radius: 10px; /* set border radius for the scrollbar handle */
+}
+
+    /* On hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; /* set color for the scrollbar handle on hover */
+    }
+
+    /* Hide scrollbar when not hovering */
+    ::-webkit-scrollbar-thumb:vertical:hover {
+        background-color: #666;
+    }
+
+/* Hide scrollbar track when not hovering */
+::-webkit-scrollbar-track:vertical:hover {
+    background-color: #f1f1f1;
+}
+
+/* Hide scrollbar when not hovering */
+::-webkit-scrollbar-thumb:horizontal:hover {
+    background-color: #666;
+}
+
+/* Hide scrollbar track when not hovering */
+::-webkit-scrollbar-track:horizontal:hover {
+    background-color: #f1f1f1;
+}
+
+.ticket-box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.ticket-list {
+    max-height: 650px; /* set a maximum height for the list */
+    overflow-y: auto; /* enable vertical scrolling when content exceeds max-height */
+    padding: 0; /* remove default padding */
+    margin: 0; /* remove default margin */
+    list-style: none; /* remove default bullet points */
+    scrollbar-width: thin;
+    scrollbar-color: darkgray white;
+}
+
+
+
+.ticket-card {
+    border: 1px solid black;
+    background: white;
+    width: 100%;
+    display: flex;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 2px 10px 14px -3px rgba(0,0,0,1);
+}
+
+.date {
+    border-right: 3px dotted white;
+    padding: 1.5rem;
+    background-color: #385892;
+    color: white;
+}
+
+.event-info{
+    display: flex;
+    width: 100%;
+}
+.details{
+    flex-grow: 1;
+    padding: 1rem 0.5rem;
+    color: #385892;
+}
+
+.card-bo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+/*    float: right;*/
+    padding: 0.5rem;
+}
+
+.add-remove {
+    display: flex;
+    flex-direction: row;
+    bottom: 0;
+    height: 36px;
+}
+
+button {
+    float: right;
+    padding: 5px;
+}
+
+#cart {
+    border: 1px solid white;
+    border-radius: 0.5rem;
+    /*padding: 3rem;*/
+    background-color: rgba(0, 0, 0, 0.7);
+ /*   margin: 2rem;*/
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+    color: white;
+    /*width: auto;*/
+    height: 100%;
+}
+
+
+.table {
+    width: 100%;
+    /*table-layout: fixed;*/
+    display: table;
+    color: white;
+}
+
+thead th, tbody td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+tfoot td {
+    text-align: right;
+}
+
+#cart-total {
+    font-weight: bold;
+}
+
+/* Adjust height of table as more items are added */
+#cart-body {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/*@media(max-width: 990px){
+    #row{
+        flex-direction: column;
+    }
+
+}*/
+
+/*@media only screen and (max-width: 630px){
+    .event-info {
+        flex-direction: column;
+    }
+
+    .cart{
+        width: auto;
+    }
+
+}*/
+
+@media only screen and (max-width: 500px) {
+    .event-info {
+        flex-direction: column;
+    }
+
+    .ticket-card{
+        flex-direction: column;
+    }
+    .date{
+        border: none;
+    }
+
+    .cart {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .table {
+        width: 100%;
+    }
+
+    .table td, .table th {
+        font-size: 0.8rem;
+    }
+} 
+

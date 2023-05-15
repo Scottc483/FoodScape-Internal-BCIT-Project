@@ -1,0 +1,29 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 0;
+}
+
+.admin-searchBar {
+    height: 50px
+}
+
+
+.admin-panel {
+    max-height: 500px;
+    overflow: auto;
+}
+

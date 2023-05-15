@@ -1,0 +1,71 @@
+﻿@model Food_Scape.Models.Event
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="h-100 d-flex align-items-center">
+    <div class="col-11 mx-auto">
+        <h1 class="text-center">Event Details</h1>
+        <hr />
+        <div style="height: 300px;" class="d-flex justify-content-center align-items-center mb-3">
+            <img class="mx-auto" src="@Model.ImageUrl" alt="@Model.Name" style="max-height: 100%;" />
+        </div>
+        <dl class="col-sm-3 row mx-auto">
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.Capacity)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Capacity)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.AgeRestriction)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.AgeRestriction)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.ImageUrl)
+            </dd>
+        </dl>
+        <div class="col-sm-3 mx-auto d-flex justify-content-between">
+            <a asp-action="Edit" asp-route-id="@Model?.EventId">Edit</a> 
+            <a asp-action="Index">Back to Event List</a>
+        </div>
+    </div>
+</div>
+
+

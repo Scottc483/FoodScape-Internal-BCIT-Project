@@ -1,0 +1,95 @@
+﻿@model Food_Scape.Models.Ticket
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="h-100 d-flex flex-column justify-content-evenly align-items-center">
+    <div style="max-height: 750px;" class="mx-auto col-lg-10 d-flex flex-sm-row flex-column justify-content-between">
+        <div style="max-height: 350px;" class="overflow-auto col-sm-6">
+            <table class="table table-bordered text-center table-striped shadow rounded">
+                <thead>
+                    <tr>
+                        <th>UserID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in ViewBag.Users)
+                    {
+                        <tr>
+                            <td>@user.UserId</td>
+                            <td>@user.FirstName</td>
+                            <td>@user.LastName</td>
+                            <td>@user.Email</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div style="max-height: 350px;" class="overflow-auto col-sm-6">
+            <table class="table table-bordered text-center table-striped shadow rounded">
+                <thead>
+                    <tr>
+                        <th>Ticket Type ID</th>
+                        <th>Ticket Type</th>
+                        <th>Price</th>
+                        <th>Day</th>
+                        <th>Event Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ticketType in ViewBag.TicketTypes)
+                    {
+                        <tr>
+                            <td>@ticketType.TicketTypeId</td>
+                            <td>@ticketType.TicketType1</td>
+                            <td>@ticketType.Price</td>
+                            <td>@ticketType.Day</td>
+                            <td>@ticketType.Event.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-3 mx-auto">
+        <h1 class="text-center">Create a Ticket</h1>
+        <hr />
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                @if(ViewBag.SelectedUser == 0)
+                {
+                    <input asp-for="UserId" class="form-control" type="text"/>
+                }
+                else 
+                {
+                    <input asp-for="UserId" class="form-control" type="text" value="@ViewBag.SelectedUser" readonly/>
+                }
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketTypeId" class="control-label"></label>
+                <input asp-for="TicketTypeId" class="form-control" type="text" />
+                <span asp-validation-for="TicketTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

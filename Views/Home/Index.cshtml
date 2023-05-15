@@ -1,0 +1,339 @@
+﻿
+@{
+    ViewData["Title"] = "FoodScape";
+
+}
+@inject FoodScapeContext _context
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@inject IServiceProvider _serviceProvider
+@using Food_Scape.Repositories
+@using Food_Scape.Models
+
+@model Food_Scape.ViewModels.HomeIndexVM;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>@ViewData["Title"]</title>
+</head>
+<body >
+
+    <!-- Banner Image-->
+    <br />
+    <div class="w-100">
+        <div class="d-flex justify-content-center">
+            <img src="~/images/banners/FoodScapeBanner5.jpg" class="img-fluid rounded mx-auto d-block" alt="FoodScape banner image">
+        </div>
+    </div>
+
+
+   
+
+    <!-- Count Down -->
+<div class="my-5">
+    <div class="w-100 text-dark">
+        <div class="card text-white" style="background-color: #161C27;">
+            <div class="card-body">
+                <h2 class="card-title text-center display-1 font-weight-bold mb-4">Festival Starts In</h2>
+                <div class="row text-center">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="display-4 font-weight-bold countdown-timer-days"></div>
+                        <div class="text-uppercase">days</div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="display-4 font-weight-bold countdown-timer-hours"></div>
+                        <div class="text-uppercase">hours</div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="display-4 font-weight-bold countdown-timer-minutes"></div>
+                        <div class="text-uppercase">minutes</div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="display-4 font-weight-bold countdown-timer-seconds"></div>
+                        <div class="text-uppercase">seconds</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+/* For screens smaller than 576px (extra small devices) */
+@@media (max-width: 575.98px) {
+  .card {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .countdown-timer-days, .countdown-timer-hours, .countdown-timer-minutes, .countdown-timer-seconds {
+    font-size: 2.5rem;
+  }
+  .text-uppercase {
+    font-size: 0.5rem;
+  }
+  .row {
+    margin: 0;
+  }
+  .col-sm-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    
+  }
+}
+
+/* For screens larger than 576px */
+@@media (min-width: 576px) {
+  .card {
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+  .card-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .countdown-timer-days, .countdown-timer-hours, .countdown-timer-minutes, .countdown-timer-seconds {
+    font-size: 4rem;
+  }
+  .text-uppercase {
+    font-size: 0.7rem;
+  }
+  .row {
+    margin: 0 -10px;
+  }
+  .col-sm-6 {
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* For screens between 992px and 1200px (large devices) */
+@@media (min-width: 992px) and (max-width: 1199.98px) {
+  .card-title {
+    font-size: 4.5rem;
+  }
+  .countdown-timer-days, .countdown-timer-hours, .countdown-timer-minutes, .countdown-timer-seconds {
+    font-size: 7rem;
+  }
+  .text-uppercase {
+    font-size: 1.1rem;
+  }
+}
+
+/* For screens larger than 1200px (extra large devices) */
+@@media (min-width: 1200px) {
+  .card-title {
+    font-size: 5rem;
+  }
+  .countdown-timer-days, .countdown-timer-hours, .countdown-timer-minutes, .countdown-timer-seconds {
+    font-size: 8rem;
+  }
+  .text-uppercase {
+    font-size: 1.2rem;
+  }
+}
+
+.testimonials-element{
+    background-color: #1c2331;
+}
+</style>
+
+
+
+
+
+
+    <!-- Vendor Paragraph && Video -->
+    <div class="py-5">
+        <div class="row mx-md-auto">
+            <div class="col-md-6 px-md-5 overflow-hidden">
+                <h2 class="mb-4">Enjoy Our Daily Vendors</h2>
+                <p class="lead mb-4">FoodScape's amazing vendors are dedicated to providing outstanding service and delicious food for all festival-goers. With a wide variety of cuisines and flavors, FoodScape's vendors are sure to satisfy any craving. Come and join us for a celebration of food, community, and culture!</p>
+            </div>
+            <div class="col-md-6">
+                <div style="position: relative;">
+                    <!-- Video Footage Copyright Free From Coverr.co-->
+                    <video src="~/videos/vendor.mp4" class="img-fluid rounded w-100" alt="FoodScape banner image" autoplay loop></video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vendor Paragraph && Video -->
+    <div class="py-5">
+        <div class="row mx-md-auto">
+            <div class="col-md-6 overflow-hidden">
+                <div style="position: relative;">
+                    <!-- Video Footage Copyright Free From Coverr.co-->
+                    <video src="~/videos/music.mp4" class="img-fluid rounded w-100" alt="FoodScape banner image" autoplay loop></video>
+                </div>
+            </div>
+            <div class="col-md-6 px-md-5 overflow-auto">
+                <h2 class="mb-4">19+ Event's Start 9PM</h2>
+                <p class="lead mb-4">Looking for some adult fun at FoodScape? Come join us for our 19+ events that start after 9 pm! With live music, delicious drinks, and a lively atmosphere, you won't want to miss out on these evening festivities. Whether you're looking to dance the night away or just relax with a cocktail, our 19+ events are the perfect way to end your day at FoodScape. So grab your friends and come on down to experience the excitement!</p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- What Were About -->
+    <section id="about" class="bg-light py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h2 class="display-4 mb-5"><strong>What We're About</strong></h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="lead mb-5">Welcome to <strong>FoodScape</strong>, Canada's premier food-truck festival, where we bring together the best culinary experiences from across the country for three unforgettable days. Immerse yourself in a vibrant atmosphere filled with mouth-watering cuisine, live music, and fun activities, all set against a stunning backdrop.</p>
+                            <p class="lead mb-5">Our festival features an incredible lineup of food trucks, each serving up their best dishes for you to savor. From gourmet burgers and artisanal pizzas to exotic Asian fusion and delectable desserts, there's something for every taste bud.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="lead mb-5">In addition to our fantastic food trucks, we offer a range of activities for all ages. Enjoy live music performances from some of Canada's top artists, or take part in one of our interactive workshops, where you can learn from local chefs and industry experts. Our festival is also family-friendly, with a dedicated kids' zone.</p>
+                            <p class="lead mb-5">With extended hours of operation from 10am to 10pm each day, there's plenty of time to explore everything we have to offer. Purchase a <strong>Day-Pass or Weekend-Pass</strong> and unlock access to exclusive offers and deals. Our festival is also committed to sustainability, with eco-friendly practices and initiatives designed to reduce waste and promote environmental stewardship.</p>
+                        </div>
+                    </div>
+                    <a href="/vendors" class="btn btn-lg btn-dark mt-5"><strong>Learn More</strong></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Vendor Cards -->
+    <div class="my-5 overflow-hidden">
+        <h2 class="text-center mb-4">Featured Vendors</h2>
+        <div class="row justify-content-center ">
+            @if (Model.Vendors != null && Model.Vendors.Any())
+            {
+                @foreach (var vendor in Model.Vendors.Take(6))
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-80">
+                            <img src="@vendor.ImageUrl" class="card-img-top h-50" alt="@vendor.Name">
+                            <div class="card-body">
+                                <h2 class="card-title fs-3">@vendor.Name</h2>
+                                <p class="card-text">@vendor.Description</p>
+                                <div class="mt-3">
+                                    <p class="mb-1"><i class="fas fa-map-marker-alt me-2"></i><span class="card-location">@vendor.Location</span></p>
+                                    <p class="mb-0"><i class="fas fa-tags me-2"></i><span class="card-vendor-type">@vendor.VendorType</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col text-center">
+                    <p>No vendors found</p>
+                </div>
+            }
+        </div>
+    </div>
+
+
+    @if (Model.Reviews.Count() >= 2)
+    {
+        <div class="text-white py-3 testimonials-element">
+            <h2 class="text-center mb-0 display-4">Testimonials</h2>
+        </div>
+        <div class="container py-5">
+            <div class="row mx-5">
+                @foreach (var item in Model.Reviews)
+                {
+                    <div class="col-md-12">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-body">
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.Review1)</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        @for (int i = 0; i < item.Rating; i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+                                        @for (int i = 0; i < 5 - item.Rating; i++)
+                                        {
+                                            <i class="far fa-star"></i>
+                                        }
+                                    </div>
+                                    <div class="justify-content-end">
+                                        @{
+                                            UserRepository uRepo = new UserRepository(_context, _serviceProvider);
+                                            var user = uRepo.GetUserById(item.UserId);
+                                            if (user != null)
+                                            {
+                                                <h3 class="small-font-size reviewName"><small class="">@user.FirstName @user.LastName?.Substring(0, 1)</small></h3>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- CountDown Script -->
+<script>
+
+    // Put Date To Count Down From
+    var countDownDate = new Date("April 12, 2023 16:00:00").getTime();
+
+    // Updating counter by 1 sec
+    var x = setInterval(function () {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Calculate the days, hours, minutes and seconds remaining
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in the elements with class names matching the variables above
+        document.querySelector(".countdown-timer-days").innerHTML = days + " ";
+        document.querySelector(".countdown-timer-hours").innerHTML = hours + " ";
+        document.querySelector(".countdown-timer-minutes").innerHTML = minutes + " ";
+        document.querySelector(".countdown-timer-seconds").innerHTML = seconds + " ";
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(x);
+            document.querySelector(".countdown-timer").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+</script>
+
+
+</html>

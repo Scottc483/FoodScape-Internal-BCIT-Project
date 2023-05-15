@@ -1,0 +1,77 @@
+﻿
+@model Food_Scape.ViewModels.ActivitiesViewModel
+
+
+
+@{
+    ViewData["Title"] = "Activites";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0">
+
+    <div class="row no-gutters">
+        <div class="col-md-12">
+            <img src="~/images/ActivitiesBanner.jpg" alt="Banner Image" class="w-100">
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <h2>Vendors</h2>
+            @if (Model.Vendors.Any())
+            {
+                <div class="row">
+                    @foreach (var vendor in Model.Vendors.Take(5))
+                    {
+                        <div class="col-md-2 mb-4">
+                            <div class="card h-100">
+                                <div class="card-img-top" style="height: 100px; overflow: hidden;">
+                                    <img src="@vendor.ImageUrl" alt="@vendor.Name" style="object-fit: cover; height: 100%; width: 100%;">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@vendor.Name</h5>
+                                    <p class="card-text">@vendor.Description</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>No vendors found</p>
+            }
+        </div>
+        <div class="col-md-12">
+            <h2>Events</h2>
+            @if (Model.Events.Any())
+            {
+                <div class="row">
+                    @foreach (var evnt in Model.Events.Take(5))
+                    {
+                        <div class="col-md-2 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">@evnt.Name</h5>
+                                    <p class="card-text">@evnt.Address</p>
+                                    <p class="card-text">Capacity: @evnt.Capacity</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>No events found</p>
+            }
+        </div>
+    </div>
+</div>
+
+
+

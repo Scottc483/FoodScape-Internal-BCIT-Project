@@ -1,0 +1,57 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="pb-5">
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-4 col-md-8 col-sm-12">
+            <div class="card shadow-lg rounded-lg border-0">
+                <!-- Header Class -->
+                <div class="card-header">
+                    <!-- Log in header text-->
+                    <h3 class="text-center font-weight-light my-4">@ViewData["Title"]</h3>
+                </div>
+                <!-- Card body Class -->
+                <div class="card-body">
+                    <!-- Form -->
+                    <form id="account" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-floating mb-3">
+                            <!-- Input Email -->
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                            <!-- Label Email -->
+                            <label asp-for="Input.Email">Email address</label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <!-- Input Password -->
+                            <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                            <!-- Label Password -->
+                            <label asp-for="Input.Password">Password</label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-check mb-3">
+                            <!-- Remember Me checkbox -->
+                            <input asp-for="Input.RememberMe" class="form-check-input" />
+                            <!-- Label Remember Me -->
+                            <label asp-for="Input.RememberMe" class="form-check-label">Remember me</label>
+                        </div>
+                        <div class="form-group">
+                            <!-- Log in Button -->
+                            <button id="login-submit" type="submit" class="btn btn-dark w-100">Login</button>
+                        </div>
+                    </form>
+                    <!-- Body Close-->
+                    <div class="text-center mt-3">
+                        <!-- Register Redirect -->
+                        <p>Don't have an account? <a href="/Identity/Account/Register" class="link-dark">Register</a></p>
+                    </div>
+                </div>
+                <!-- Card Close-->
+            </div>
+        </div>
+    </div>
+</div>

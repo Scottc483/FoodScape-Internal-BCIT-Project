@@ -1,0 +1,152 @@
+﻿@model Food_Scape.ViewModels.AccountInfoVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="./css/accountInfo/account-info-styles.css"/>
+</head>
+
+<h1 class="text-center my-5">Account Information</h1>
+
+<div class="row mx-auto " id="info-element">
+    <div class="col-md-3 mt-5 d-flex justify-content-center text-center">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-account-info-tab" data-bs-toggle="pill" href="#v-pills-account-info" role="tab" aria-controls="v-pills-account-info" aria-selected="true">Profile</a>
+  
+            <a class="nav-link" id="v-pills-tickets-tab" data-bs-toggle="pill" href="#v-pills-tickets" role="tab" aria-controls="v-pills-tickets" aria-selected="false">Tickets</a>
+
+            <a class="nav-link" id="v-pills-review-tab" data-bs-toggle="pill" href="#v-pills-review" role="tab" aria-controls="v-pills-review" aria-selected="false">Review</a>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="tab-content mt-5" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-account-info" role="tabpanel" aria-labelledby="v-pills-account-info-tab">
+                <div class="card shadow-lg">
+                    <div class="card-header text-white">
+                        <h4 class="mb-0">Profile</h4>
+                    </div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">First Name:</dt>
+                            <dd class="col-sm-8">@Model.User.FirstName</dd>
+                            <dt class="col-sm-4">Last Name:</dt>
+                            <dd class="col-sm-8">@Model.User.LastName</dd>
+                            <dt class="col-sm-4">Email:</dt>
+                            <dd class="col-sm-8">@Model.User.Email</dd>
+                        </dl>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="/Identity/Account/Manage/ChangePassword" class="btn btn-primary my-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd" d="M1 3.5A1.5 1.5 0 0 1 2.5 2h11a1.5 1.5 0 0 1 1.5 1.5v6a.5.5 0 0 1-1 0V3.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11a.5.5 0 0 0 .5.5h8a.5.5 0 0 1 0 1h-8A1.5 1.5 0 0 1 1 13.5v-11z" />
+                            </svg>
+                            Change Password
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="v-pills-tickets" role="tabpanel" aria-labelledby="v-pills-tickets-tab">
+                <div class="card shadow-lg">
+                    <div class="card-header text-white">
+                        <h4 class="mb-0">Tickets</h4>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Tickets.Any())
+                        {
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Ticket Number</th>
+                                        <th>Ticket Type</th>
+                                        <th>Event Name</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var ticket in Model.Tickets)
+                                    {
+                                        <tr>
+                                            <td>@ticket.TicketId</td>
+                                            <td>@ticket.Type</td>
+                                            <td>@ticket.Event</td>
+                                            <td>@ticket.Price</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <a href="/AccountInfo/DownloadFile" class="btn-download">
+                                Download Tickets
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-down" style="margin-top: 5px" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z" />
+                                    <path fill-rule="evenodd" d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z" />
+                                </svg>
+                            </a>
+                        }
+                        else
+                        {
+                            <p>You have not purchased any tickets yet.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="v-pills-review" role="tabpanel" aria-labelledby="v-pills-review-tab">
+                <div class="card shadow-lg">
+                    <div class="card-header text-white">
+                        <h4 class="mb-0">Review</h4>
+                    </div>
+                    @if (@Model.UserReview != null)
+                    {
+                    <div class="card m-4 box-shadow pt-3">
+                        <div class="card-body">
+                            <p class="card-text">@Html.DisplayFor(modelItem => Model.UserReview.Review1)</p>
+                            <div class="d-flex flex-column justify-content-between">
+                                <div class="d-flex flex-row justify-content-between">
+                                    <div>
+                                        @for (int i = 0; i < Model.UserReview.Rating; i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+                                        @for (int i = 0; i < 5 - Model.UserReview.Rating; i++)
+                                        {
+                                            <i class="far fa-star"></i>
+                                        }
+                                    </div>
+                                    <div>
+                                        @{
+                                            <h3 class="small-font-size reviewName"><small class="">@Model.User.FirstName @Model.User.LastName?.Substring(0, 1)</small></h3>
+                                        }
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <p class="mt-2 mb-0">To edit or delete your review, please follow this link.</p>
+                            <a class="text-center text-decoration-underline" href="/Reviews">REVIEW PAGE</a>
+                        </div>
+                    }
+                    else
+                    {
+                    <div class="card m-4 box-shadow pt-3">
+                        <div class="card-body">
+                            <h2 class="card-title text-center">You haven't written a review yet</h2>
+                            <p class="card-text text-center">Writing a review is a great way to share your experiences with other users and help them make informed decisions about our product. We'd love to hear from you!</p>
+                            <div class="text-center">
+                         
+                            </div>
+                        </div>
+                    </div>
+                        <div class="card-footer text-center">
+                            <p class="mt-2 mb-0">To create your review, please follow this link.</p>
+                            <a class="text-center text-decoration-underline my-2" href="/Reviews">REVIEW PAGE</a>
+                        </div>
+                    }   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

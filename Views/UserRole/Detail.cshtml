@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Food_Scape.ViewModels.RoleVM>
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="h-100 d-flex align-items-center">
+    <div class="col-3 mx-auto">
+        <h3 class="text-center">@ViewBag.UserName</h3>
+        <p class="text-center">
+            @Html.ActionLink(
+            "Back to User List",
+            actionName: "Index",
+            controllerName: "User")
+        </p>
+        <table class="table table-bordered text-center table-striped rounded shadow">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoleName)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoleName)
+                        </td>
+                        <td>
+                            @Html.ActionLink(
+                                "Delete Role",
+                                actionName: "Delete",
+                                controllerName: "UserRole",
+                                new { userName = ViewBag.UserName, roleName = item.RoleName }
+                            )
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            <p class="btn btn-primary">
+                @Html.ActionLink(
+                "Assign Roles",
+                actionName: "Create",
+                controllerName: "UserRole",
+                new { userName = @ViewBag.UserName, },
+                new { @class="text-white text-decoration-none"})
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

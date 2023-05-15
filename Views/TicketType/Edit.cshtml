@@ -1,0 +1,67 @@
+﻿@model Food_Scape.Models.TicketType
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="h-100 d-flex align-items-center">
+    <div class="col-3 mx-auto">
+        <h1 class="text-center">Create Event</h1>
+        <hr />
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TicketTypeId" class="control-label"></label>
+                <input asp-for="TicketTypeId" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketType1" class="control-label"></label>
+                <input asp-for="TicketType1" class="form-control" />
+                <span asp-validation-for="TicketType1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Discount" class="control-label"></label>
+                <input asp-for="Discount" class="form-control" />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Day" class="control-label"></label>
+                <input asp-for="Day" class="form-control" />
+                <span asp-validation-for="Day" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventId" class="control-label"></label>
+                @Html.DropDownList(
+                    "EventId",
+                    new SelectList(ViewBag.EventSelectList,
+                        "Value",
+                        "Text"
+                    ),
+                    "Select Event",
+                    new { @id = "eventDD", @class = "form-control mb-3" }
+                )
+                <span asp-validation-for="EventId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+        <div>
+            <a asp-action="AdminIndex">Back to Ticket Type List</a>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

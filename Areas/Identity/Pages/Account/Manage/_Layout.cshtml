@@ -1,0 +1,30 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+@*<h1>Manage your account</h1>*@
+
+<div>
+   @* <h2>Change your account settings</h2>*@
+@*    <hr />*@
+    <div class="">
+@*        <div class="col-md-3">
+            <partial name="_ManageNav" />
+        col-md-9 was in render body class
+        </div>*@
+        <div class="d-flex justify-content-center flex-column mx-auto" style="max-width:750px;">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

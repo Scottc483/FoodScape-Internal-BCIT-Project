@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Food_Scape.Models.FsUser>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<div class="h-100 d-flex align-items-center">
+    <div class="col-11 mx-auto">
+        @if (ViewBag.Message != "")
+        {
+            <h1 class="text-success text-center">@ViewBag.Message</h1>
+        }
+        @if (ViewBag.Error != "")
+        {
+            <h1 class="text-danger text-center">@ViewBag.Error</h1>
+        }
+        <h1 class="text-center">Users</h1>
+        <form asp-action="Index" method="get" class="px-5">
+            <div class="form-actions no-color admin-searchBar d-flex flex-row justify-content-center align-items-center">
+                <div class="form-group align-items-center" style="display: inline-block">
+                    <span>Search Users:</span>
+                    <input type="text" name="SearchString"
+                           value="@ViewData["currentFilter"]" required />
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+                <a asp-action="Index" class="mx-4">Clear Search Bar</a>
+            </div>
+        </form>
+
+        <div class="admin-panel overflow-auto">
+            <table id="userTable" class="table table-bordered text-center table-striped shadow rounded">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Roles</th>
+                        <th>Tickets</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => user.UserId)</td>
+                            <td>@Html.DisplayFor(modelItem => user.FirstName)</td>
+                            <td>@Html.DisplayFor(modelItem => user.LastName)</td>
+                            <td>@Html.DisplayFor(modelItem => user.Email)</td>
+                            <td>
+                                <a href="/admin/user/roles/@user.Email">View Roles</a>
+                            </td>
+
+                            <td>
+                                <a href="/admin/user/tickets/@user.UserId">View Tickets</a>
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@user.UserId" asp-controller="User">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@user.UserId" asp-controller="User">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@user.UserId" asp-controller="User">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="h4">
+            <a asp-action="Index" asp-controller="Admin">Back to Admin Panel</a>
+        </div>
+    </div>
+
+</div>
+
+

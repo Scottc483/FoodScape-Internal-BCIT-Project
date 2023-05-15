@@ -1,0 +1,64 @@
+﻿@model Food_Scape.Models.TicketType
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="h-100 d-flex align-items-center">
+    <div class="col-11 mx-auto">
+        <h1 class="text-center">Ticket Type Details</h1>
+        <hr />
+        <dl class="col-sm-3 row mx-auto">
+            <dt class="col-sm-5">
+                Ticket Type ID
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.TicketTypeId)
+            </dd>
+            <dt class="col-sm-5">
+                Ticket Type
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.TicketType1)
+            </dd>
+            <dt class="col-sm-5">
+                Price
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt class="col-sm-5">
+                Discount
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Discount)
+            </dd>
+            <dt class="col-sm-5">
+                Day
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Day)
+            </dd>
+            <dt class="col-sm-5">
+                Event ID
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.EventId)
+            </dd>
+            <dt class="col-sm-5">
+                Event Name
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Event.Name)
+            </dd>
+
+        </dl>
+        <div class="col-sm-3 mx-auto d-flex justify-content-between">
+            <a asp-action="Edit" asp-route-id="@Model?.TicketTypeId">Edit</a>
+            <div class="d-flex flex-column">
+                <a asp-action="AdminIndex">Back to Ticket Type List</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Food_Scape.Models.TicketType>
+
+@{
+    ViewData["Title"] = "AdminIndex";
+}
+
+<div class="h-100 d-flex align-items-center">
+    <div class="col-11 mx-auto">
+        @if (ViewBag.Message != "")
+        {
+            <h1 class="text-success text-center">@ViewBag.Message</h1>
+        }
+        @if (ViewBag.Error != "")
+        {
+            <h1 class="text-danger text-center">@ViewBag.Error</h1>
+        }
+        <h1 class="text-center">Ticket Types</h1>
+        <p class="text-center">
+            <a asp-action="Create" asp-controller="TicketType">Create New Ticket Type</a>
+        </p>
+        <form asp-action="AdminIndex" method="get" class="px-5">
+            <div class="form-actions no-color admin-searchBar d-flex flex-row justify-content-center align-items-center">
+                <div class="form-group align-items-center" style="display: inline-block">
+                    <span>Search Vendors:</span>
+                    <input type="text" name="SearchString"
+                           value="@ViewData["currentFilter"]" required />
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+                <a asp-action="AdminIndex" class="mx-4">Clear Search Bar</a>
+            </div>
+        </form>
+
+        <div class="admin-panel overflow-auto">
+            <table class="table table-bordered text-center table-striped shadow rounded">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ticket Type</th>
+                        <th>Price</th>
+                        <th>Discount</th>
+                        <th>Day</th>
+                        <th>Event</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ticketType in Model)
+                    {
+                        <tr>
+                            <td>@ticketType.TicketTypeId</td>
+                            <td>@ticketType.TicketType1</td>
+                            <td>@ticketType.Price</td>
+                            <td>@ticketType.Discount</td>
+                            <td>@ticketType.Day</td>
+                            @if (ticketType.Event != null)
+                            {
+                                <td>@ticketType.Event.Name</td>
+                            } 
+                            else
+                            {
+                                <td></td>
+                            }
+                            <td>
+                                <a asp-action="Edit" asp-controller="TicketType" asp-route-id="@ticketType.TicketTypeId">Edit</a> |
+                                <a asp-action="Details" asp-controller="TicketType" asp-route-id="@ticketType.TicketTypeId">Details</a> |
+                                <a asp-action="Delete" asp-controller="TicketType" asp-route-id="@ticketType.TicketTypeId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="h4">
+            <a asp-action="Index" asp-controller="Admin">Back to Admin Panel</a>
+        </div>
+    </div>
+</div>

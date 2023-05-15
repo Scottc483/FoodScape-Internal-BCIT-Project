@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Food_Scape.Models.EventVendor>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="h-100 d-flex align-items-center">
+    <div class="col-sm-9 mx-auto">
+        @if (ViewBag.Message != "")
+        {
+            <h1 class="text-success text-center">@ViewBag.Message</h1>
+        }
+        @if (ViewBag.Error != "")
+        {
+            <h1 class="text-danger text-center">@ViewBag.Error</h1>
+        }
+        <h1 class="text-center">Event Vendors</h1>
+        <p class="text-center">
+            <a asp-action="Create" asp-controller="EventVendor">Create New Event Vendor</a>
+        </p>
+        <form asp-action="Index" method="get" class="px-5">
+            <div class="form-actions no-color admin-searchBar d-flex flex-row justify-content-center align-items-center">
+                <div class="form-group align-items-center" style="display: inline-block">
+                    <span>Search Event Vendors:</span>
+                    <input type="text" name="SearchString"
+                           value="@ViewData["currentFilter"]" required />
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+                <a asp-action="Index" class="mx-4">Clear Search Bar</a>
+            </div>
+        </form>
+
+        <div class="admin-panel overflow-auto">
+            <table class="table table-bordered text-center table-striped shadow rounded">
+                <thead>
+                    <tr>
+                        <th>Event Vendor ID</th>
+                        <th>Event ID</th>
+                        <th>Event</th>
+                        <th>Vendor ID</th>
+                        <th>Vendor</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var eventVendor in Model)
+                    {
+                        <tr>
+                            <td>@eventVendor.EventVendorId</td>
+                            <td>@eventVendor.EventId</td>
+                            <td>@eventVendor.Event.Name</td>
+                            <td>@eventVendor.VendorId</td>
+                            <td>@eventVendor.Vendor.Name</td>
+                            <td>
+                                <a asp-action="Edit" asp-controller="EventVendor" asp-route-id="@eventVendor.EventVendorId">Edit</a> |
+                                <a asp-action="Details" asp-controller="EventVendor" asp-route-id="@eventVendor.EventVendorId">Details</a> |
+                                <a asp-action="Delete" asp-controller="EventVendor" asp-route-id="@eventVendor.EventVendorId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="h4">
+            <a asp-action="Index" asp-controller="Admin">Back to Admin Panel</a>
+        </div>
+    </div>
+</div>
+

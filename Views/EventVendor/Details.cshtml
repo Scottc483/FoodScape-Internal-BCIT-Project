@@ -1,0 +1,51 @@
+﻿@model Food_Scape.Models.EventVendor
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="h-100 d-flex align-items-center">
+    <div class="col-11 mx-auto">
+        <h1 class="text-center">Event Vendor Details</h1>
+        <hr />
+        <dl class="col-sm-3 row mx-auto">
+            <dt class="col-sm-5">
+                Event Vendor ID
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.EventVendorId)
+            </dd>
+            <dt class="col-sm-5">
+                Event ID
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.EventId)
+            </dd>
+            <dt class="col-sm-5">
+                Event Name
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Event.Name)
+            </dd>
+            <dt class="col-sm-5">
+                Vendor ID
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.VendorId)
+            </dd>
+            <dt class="col-sm-5">
+                Vendor Name
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Vendor.Name)
+            </dd>
+
+        </dl>
+        <div class="col-sm-3 mx-auto d-flex justify-content-between">
+            <a asp-action="Edit" asp-route-id="@Model?.VendorId">Edit</a>
+            <div class="d-flex flex-column">
+                <a asp-action="Index">Back to Event Vendor List</a>
+            </div>
+        </div>
+    </div>
+</div>

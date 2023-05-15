@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Food_Scape.Models.Event>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="h-100 d-flex align-items-center">
+    <div class="col-11 mx-auto">
+        @if (ViewBag.Message != "")
+        {
+            <h1 class="text-success text-center">@ViewBag.Message</h1>
+        }
+        @if (ViewBag.Error != "")
+        {
+            <h1 class="text-danger text-center">@ViewBag.Error</h1>
+        }
+        <h1 class="text-center">Events</h1>
+        <p class="text-center">
+            <a asp-action="Create" asp-controller="Event">Create New Event</a>
+        </p>
+        <form asp-action="Index" method="get" class="px-5">
+            <div class="form-actions no-color admin-searchBar d-flex flex-row justify-content-center align-items-center">
+                <div class="form-group align-items-center" style="display: inline-block">
+                    <span>Search Events:</span>
+                    <input type="text" name="SearchString"
+                           value="@ViewData["currentFilter"]" required />
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+                <a asp-action="Index" class="mx-4">Clear Search Bar</a>
+            </div>
+        </form>
+        <div class="admin-panel overflow-auto">
+            <table class="table table-bordered text-center table-striped shadow rounded">
+                <thead>
+                    <tr>
+                        <th>Event ID</th>
+                        <th>Address</th>
+                        <th>Capacity</th>
+                        <th>Name</th>
+                        <th>Age Restriction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var eventItem in Model)
+                    {
+                        <tr>
+                            <td>@eventItem.EventId</td>
+                            <td>@eventItem.Address</td>
+                            <td>@eventItem.Capacity</td>
+                            <td>@eventItem.Name</td>
+                            <td>@eventItem.AgeRestriction</td>
+                            <td class="">
+                                <a asp-action="Edit" asp-controller="Event" asp-route-id="@eventItem.EventId">Edit</a> |
+                                <a asp-action="Details" asp-controller="Event" asp-route-id="@eventItem.EventId">Details</a> |
+                                <a asp-action="Delete" asp-controller="Event" asp-route-id="@eventItem.EventId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <div class="h4">
+            <a asp-action="Index" asp-controller="Admin">Back to Admin Panel</a>
+        </div>
+    </div>
+</div>
+
+

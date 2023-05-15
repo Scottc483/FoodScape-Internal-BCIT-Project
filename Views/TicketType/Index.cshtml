@@ -1,0 +1,322 @@
+
+﻿@using System.Globalization;
+
+@model IEnumerable<Food_Scape.ViewModels.TicketTypeVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="./css/Tickets.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row" style="justify-content: space-evenly" id="row">
+            <div class="ticket-box col-lg-6">
+
+            <h1 class="mt-0 text-center text-white">Available Tickets</h1>
+                
+                <div class="d-flex flex-column overflow-auto ticket-list">
+
+                    @if (Model != null && Model.Any())
+                    {
+
+                        @foreach (var ticketType in Model)
+                        {
+                            DateTime date = DateTime.ParseExact(@ticketType.StartDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                            string formattedDate = date.ToString("MMM dd, yyyy");
+                            DateTime startDate = DateTime.ParseExact(@ticketType.StartDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                            string sDate = date.ToString("MMM dd");
+                            DateTime endDate = DateTime.ParseExact(@ticketType.EndDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                            string eDate = endDate.ToString("dd, yyyy");
+                            string dateRange = $"{sDate}-{eDate}";
+
+                            <div class="ticket-card">
+
+                                <div class="date">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4-event" viewBox="0 0 16 16">
+                                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z" />
+                                        <path d="M11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                                    </svg>
+                                    <h4 class="mt-1">
+
+                                        @if (ticketType.TicketType1 == "Pass")
+                                        {
+                                            @dateRange
+                                        }
+                                        else
+                                        {
+                                            @formattedDate
+                                        }
+                                    </h4>
+                                    <h3>@ticketType.TicketType1</h3>
+
+                                </div>
+                                <div class="event-info">
+                                    <div class="details">
+                                        <h4>@ticketType.Name</h4>
+                                        <p>@ticketType.Description</p>
+                                        <p>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                            </svg>@ticketType.Address
+                                        </p>
+                                        <p>Price: $@ticketType.Price</p>
+
+                                        @if (ticketType.Discount != null && ticketType.Discount != 0)
+                                        {
+                                            <p style="color: red;">Discount: @ticketType.Discount %</p>
+                                        }
+                                    </div>
+                                    <div class="card-bo">
+
+                                        @if (!User.Identity.IsAuthenticated)
+                                        {
+                                            <div>
+                                                <button class="btn btn-danger"> <a style="color: white; text-decoration: none" asp-area="Identity" asp-page="/Account/Login"> Buy Tickets</a></button>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="add-remove">
+                                                <button class="btn btn-primary add-to-cart" data-type="@ticketType.TicketTypeId" data-types="@ticketType.TicketType1" data-price="@ticketType.Price" data-event="@ticketType.Name" onclick="addToCart('@ticketType.Name','@ticketType.TicketTypeId',@ticketType.Price,'@ticketType.TicketType1')">Add to Cart</button>
+                                                       
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No Tickets found</p>
+                    }
+                </div>
+            </div>
+
+            <!-- Cart -->
+            <div class="card col-lg-5" id="cart">
+                <div class="card-header">
+                    <h2>Cart</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Type</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-body"></tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4"><strong>Total:</strong></td>
+                                <td><strong id="cart-total">$0.00</strong></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        <div id="paypal-button"></div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+
+    <script>
+        var cartItems = [];
+
+
+// function to add an item to the cart
+function addToCart(event, typeId, price,types) {
+  console.log(cartItems);
+  // check if the item is already in the cart
+  var itemInCart = false;
+  for (var i = 0; i < cartItems.length; i++) {
+    if (cartItems[i].event == event && cartItems[i].typeId == typeId) {
+      // if the item is already in the cart, increase the quantity by 1
+      cartItems[i].quantity++;
+      itemInCart = true;
+      break;
+    }
+  }
+  // if the item is not in the cart, add it with quantity 1
+  if (!itemInCart) {
+    cartItems.push({ event: event, typeId: typeId, price: price, quantity: 1,types:types });
+  }
+  // update the cart
+  updateCart();
+}
+
+// function to remove an item from the cart
+function removeFromCart(event, typeId) {
+  // loop through the cart items to find the item to remove
+  for (var i = 0; i < cartItems.length; i++) {
+    if (cartItems[i].event == event && cartItems[i].typeId == typeId) {
+      // remove the item from the cart and exit the loop
+      if (cartItems[i].quantity == 1) {
+        cartItems.splice(i, 1);
+      } else {
+        cartItems[i].quantity--;
+      }
+      break;
+    }
+  }
+  // update the cart
+  updateCart();
+}
+
+// function to update the cart
+function updateCart() {
+  // sort the cart items by event and ticket type
+  cartItems.sort(function(a, b) {
+    if (a.event < b.event) {
+      return -1;
+    } else if (a.event > b.event) {
+      return 1;
+    } else {
+      if (a.typeId < b.typeId) {
+        return -1;
+      } else if (a.typeId > b.typeId) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+  });
+
+  // update the cart table body
+  var cartTableBody = document.getElementById("cart-body");
+  cartTableBody.innerHTML = "";
+  var total = 0;
+  for (var i = 0; i < cartItems.length; i++) {
+    var item = cartItems[i];
+    var row = cartTableBody.insertRow();
+    var eventCell = row.insertCell();
+    var typeCell = row.insertCell();
+    var priceCell = row.insertCell();
+    var quantityCell = row.insertCell();
+    var totalCell = row.insertCell();
+     var removeCell = row.insertCell();
+    eventCell.innerHTML = item.event;
+    typeCell.innerHTML = item.types;
+    priceCell.innerHTML = item.price;
+    quantityCell.innerHTML = item.quantity;
+    totalCell.innerHTML = "$" + (item.price * item.quantity).toFixed(2);
+     var removeButton = document.createElement("button");
+    removeButton.classList.add("btn", "btn-danger", "remove-from-cart");
+    removeButton.setAttribute("data-event", item.event);
+    removeButton.setAttribute("data-type", item.typeId);
+    removeButton.setAttribute("onclick", "removeFromCart('" + item.event + "', '" + item.typeId + "')");
+    removeButton.innerHTML = "&#10006;";
+    removeCell.appendChild(removeButton);
+    total += item.price * item.quantity;
+  }
+
+  var cartTotal = document.getElementById("cart-total");
+  cartTotal.innerHTML = "$" + total.toFixed(2);
+  // update the cart icon with the total number of items in the cart
+  var totalQuantity = 0;
+  for (var i = 0; i < cartItems.length; i++) {
+    totalQuantity += cartItems[i].quantity;
+  }
+  localStorage.setItem('CART_KEY',JSON.stringify(cartItems));
+  $("#cart-icon").text(totalQuantity);
+}
+
+
+    </script>
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    <div id="paypal-button"></div>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+    <script>
+
+        paypal.Button.render({
+        env: 'sandbox', // Or 'production'
+        style: {
+        size: 'small',
+        color: 'silver',
+        shape: 'rect',
+        layout: 'horizontal'
+        },
+        client: {
+        sandbox: 'AT5zeV3zqXAUQM7ImLh1n_ANqn2snIwEWhJ07KA13u4uuP2j_EUEITvrUFI8O6-4NiQnQsH3kEK3OnBX',
+        },
+        commit: true,
+        payment: function (data, actions) {
+        return actions.payment.create({
+        payment: {
+        transactions: [{
+        custom: 'Custom data goes here!',
+        amount: {
+        total: document.getElementById("cart-total").innerText.slice(1),
+        currency: 'CAD'
+        }
+        }]
+        }
+        });
+        },
+        onAuthorize: function (data, actions) {
+        return actions.payment.execute().then(function (payment) {
+        var dataObject = {
+
+        FirstName: payment.payer.payer_info.first_name,
+        LastName: payment.payer.payer_info.last_name,
+        Email: payment.payer.payer_info.email,
+        PaymentId: payment.id,
+        Amount: payment.transactions[0].amount.total,
+        Currency: payment.transactions[0].amount.currency,
+        PaymentMethod: payment.payer.payment_method,
+        CartItems: cartItems
+        }
+        var testString = "test"
+        console.log(cartItems);
+        console.log(dataObject);
+        $.ajax({
+        type: "POST",
+        url: "/Transactions/PaySuccess",
+        data: JSON.stringify(dataObject),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        //after success
+        success: function (msg) {
+
+        window.location.href = "/Transactions/Confirmation?confirmationID=" + data.paymentID;
+        },
+        //after fail
+        //JSON.stringify(msg)
+        error: function (msg) {
+        //alert("fail: " + "Paypal Transaction Failed please Try again at a later time");
+        alert("fail: " + "Paypal Transaction Failed please Try again at a later time");
+        }
+        });
+        })
+
+        },
+        onCancel: function (data, actions) {
+        /*
+        * Buyer cancelled the payment
+        */
+        },
+
+        }, '#paypal-button');
+    </script>
+}   

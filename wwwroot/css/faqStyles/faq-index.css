@@ -1,0 +1,24 @@
+﻿/* Customize the accordion headers */
+.accordion-header {
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 0;
+    padding: 1rem;
+}
+
+/* Customize the accordion buttons */ 
+.accordion-button {
+    color: #000;
+    font-weight: bold;
+}
+
+/* Customize the accordion body */
+.accordion-body {
+/*    background-color: #161D26;*/
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-radius: 0;
+    padding: 1rem;
+}
+
+

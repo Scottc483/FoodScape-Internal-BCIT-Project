@@ -1,0 +1,70 @@
+﻿@using System.Globalization;
+@model IEnumerable<Food_Scape.Models.Ipn>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="h-100 d-flex align-items-center">
+    <div class="col-8 mx-auto">
+        <h1 class="text-center">Transactions</h1>
+        <form asp-action="Index" style="height: 75px;" method="get" class="px-5">
+            <div class="form-actions no-color admin-searchBar d-flex flex-row justify-content-center align-items-center">
+                <div class="form-group align-content-center" style="display: inline-block">
+                    <span class="text-center">Search Transactions By:</span>
+                    <input type="text" name="SearchString"
+                            value="@ViewData["currentFilter"]" 
+                            required
+                            placeholder="Payment ID / User ID" />
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+                <a asp-action="Index" class="mx-4">Clear Search Bar</a>
+            </div>
+        </form>
+
+        <div class="admin-panel overflow-auto">
+            <table class="table table-bordered text-center table-striped shadow rounded">
+                <thead>
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>User ID</th>
+                        <th>Amount</th>
+                        <th>Currency</th>
+                        <th>Payment Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        string paymentid = item.PaymentId.Split('-')[1];
+                        decimal amountCurr = Convert.ToDecimal(item.Amount);
+                        string amountC = amountCurr.ToString("C") + " " + item.Currency;
+                        Console.WriteLine(amountC);
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PaymentId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Amount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Currency)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PaymentMethod)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="h4">
+            <a asp-action="Index" asp-controller="Admin">Back to Admin Panel</a>
+        </div>
+    </div>
+</div>
+

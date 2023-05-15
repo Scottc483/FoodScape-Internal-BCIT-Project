@@ -1,0 +1,130 @@
+﻿@model Food_Scape.ViewModels.EventInfoViewModel
+
+@inject FoodScapeContext _context
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@using Food_Scape.Repositories
+@using Food_Scape.Models
+
+@{
+    ViewData["Title"] = "Event Info";
+}
+
+<html>
+    <body>
+        <!-- Header -->
+        
+    <div class="jumbotron jumbotron-fluid bg-black text-white">
+        <div class="container">
+            <h1 class="display-4 text-center">Upcoming Events</h1>
+            <p class="lead text-center">Find out what's happening soon</p>
+        </div>
+    </div>
+    <br />
+
+
+    <!-- Map / Paragraph text -->
+    <section class="my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/images/FoodScapePoster.png" alt="Map" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="mb-4">Explore FoodScape</h2>
+                    <p class="lead mb-4">Come explore FoodScape, the ultimate destination for food lovers and music enthusiasts! With a dynamic layout featuring a multitude of food trucks and vendors, you can indulge in a diverse range of culinary delights from around the world. From savory to sweet, there is something for everyone. While satisfying your taste buds, enjoy the sounds of live music and other exciting events. FoodScape is not just a food truck festival, it is an immersive experience that brings people together to celebrate food, music, and community. So, grab your friends and family and come explore FoodScape today!</p>
+                    <br />
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Main Events</h3>
+                            <p class="mb-4">FoodScape AfterDark is the ultimate night out for music lovers and adults looking for a lively atmosphere. With an electrifying lineup of live performances and an age-restricted entry of 19+, it is the perfect destination for a night of fun and entertainment.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Safety</h3>
+                            <p class="mb-4">At FoodScape, safety is our top priority. We follow all necessary safety protocols and guidelines to ensure that our guests can enjoy the festival in a secure environment. Our team regularly monitors the event to maintain a safe and enjoyable experience for all attendees.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Events Cards -->
+        
+    <div class="container">
+        <div class="row">
+            @foreach (var e in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 border-0 shadow">
+                        <div class="position-relative">
+                            <img src="@e.ImageUrl" class="card-img-top rounded-0" alt="@e.Name">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@e.Name</h5>
+                            <p class="card-text text-muted">@e.Address</p>
+                            <p class="card-text"><small class="text-muted">Capacity: @e.Capacity</small></p>
+                            <p class="card-text"><small class="text-muted">Age restriction: @e.AgeRestriction</small></p>
+                            <p class="card-text"><small class="text-muted">Start date: @e.StartDate.Value.ToString("MMMM dd, yyyy")</small></p>
+                            <p class="card-text"><small class="text-muted">End date: @e.EndDate.Value.ToString("MMMM dd, yyyy")</small></p>
+                            <p class="card-text"><small class="text-muted">Description: @e.Description</small></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+        <br />
+        <br />
+
+
+
+    <!-- Google Map API Styles -->
+    <style>
+        #map {
+            width: 80%;
+            height: 400px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+        }
+    </style>
+
+    <!-- Google Map Div -->
+    <div id="map"></div>
+    <br />
+    <br />
+
+    <!-- Google Map API Script -->
+    <script>
+
+        var apiKey = Configuration["GoogleMapsApiKey"];
+        // Initialize and add the map
+        function initMap() {
+            // The location of FoodScape (Currently held at PNE)
+            var location = { lat: 49.2816, lng: -123.0362 };
+            // The map, centered at FoodScape
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: location
+            });
+            // The marker, positioned at FoodScape
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
+    </script>
+
+    <script 
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLY3QnLaWtmiL2jresCDn-HO3zTMN3gY8&callback=initMap" async defer>
+    </script>
+
+
+    </body>
+</html>
+
+
+<!-- src="~/images/BurgerBash.png" -->

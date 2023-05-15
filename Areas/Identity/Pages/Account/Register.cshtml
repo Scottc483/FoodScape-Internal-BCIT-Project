@@ -1,0 +1,82 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="pb-5">
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-5 col-md-8 col-sm-12">
+            <div class="card shadow-lg rounded-lg border-0">
+                <!-- Header Class -->
+                <div class="card-header">
+                    <!-- Create an Account header text-->
+                    <h3 class="text-center font-weight-light my-4">Create an Account</h3>
+                </div>
+                <!-- Card body Class -->
+                <div class="card-body">
+                    <!-- Form -->
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-floating mb-3">
+                            <!-- Input First Name -->
+                            <input asp-for="Input.FirstName" class="form-control" autocomplete="firstname" aria-required="true" />
+                            <!-- Label First Name -->
+                            <label asp-for="Input.FirstName">First Name</label>
+                            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <!-- Input Last Name -->
+                            <input asp-for="Input.LastName" class="form-control" autocomplete="lastname" aria-required="true" />
+                            <!-- Label Last Name -->
+                            <label asp-for="Input.LastName">Last Name</label>
+                            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <!-- Input Email -->
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                            <!-- Label Email -->
+                            <label asp-for="Input.Email">Email address</label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <!-- Input Password -->
+                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                            <!-- Label Password -->
+                            <label asp-for="Input.Password">Password</label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <!-- Input Confirm Password -->
+                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                            <!-- Label Confirm Password -->
+                            <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <!-- Register Button -->
+                            <button id="registerSubmit" type="submit" class="btn btn-dark w-100">Register</button>
+                        </div>
+                        <br />
+                        <!-- ReCaptcha-->
+                        <div class="g-recaptcha" data-sitekey='@ViewData["SiteKey"]'></div>
+                    </form>
+                    <!-- Body Close-->
+                    <div class="text-center mt-3">
+                        <!-- Login Redirect -->
+                        <p>Already have an account? <a href="/Identity/Account/Login" class="link-dark">Login</a></p>
+                    </div>
+                </div>
+                <!-- Card Close-->
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- A reference is required to the Google API -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

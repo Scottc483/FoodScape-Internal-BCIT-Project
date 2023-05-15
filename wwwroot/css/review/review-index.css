@@ -1,0 +1,37 @@
+﻿
+
+.close {
+    background-color: transparent;
+}
+
+
+.fas {
+    color: #f4b139ed;
+}
+
+.card {
+    background-color: #F2F2F2;
+}
+
+.reviewName small {
+    color: #1c2331;
+}
+
+.review-btn {
+    background-color: #1c2331;
+    border-color: #1c2331;
+    color: #f4b139ed;
+
+}
+
+.review-btn:hover {
+    color: #F27405;
+    background-color: #1c2331;
+    border-color: #1c2331;
+}
+
+@media (min-width: 650px) {
+    .review-page-btn {
+        font-size: 1.5rem;
+    }
+}

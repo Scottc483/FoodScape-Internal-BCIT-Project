@@ -1,0 +1,63 @@
+﻿@model Food_Scape.Models.Vendor
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="h-100 d-flex align-items-center">
+    <div class="col-11 mx-auto">
+        <h1 class="text-center">Vendor Details</h1>
+        <hr />
+        <div style="height: 300px;" class="d-flex justify-content-center align-items-center mb-3">
+            <img class="mx-auto" src="@Model.ImageUrl" alt="@Model.Name" style="max-height: 100%;"/>
+        </div>
+        <dl class="col-sm-3 row mx-auto">
+            <dt class = "col-sm-5">
+                Vendor
+            </dt>
+            <dd class = "col-sm-7">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class = "col-sm-5">
+                Description
+            </dt>
+            <dd class = "col-sm-7">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class = "col-sm-5">
+                From
+            </dt>
+            <dd class = "col-sm-7">
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt class = "col-sm-5">
+                To
+            </dt>
+            <dd class = "col-sm-7">
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+            <dt class = "col-sm-5">
+                Type
+            </dt>
+            <dd class = "col-sm-7">
+                @Html.DisplayFor(model => model.VendorType)
+            </dd>
+            <dt class = "col-sm-5">
+                Location
+            </dt>
+            <dd class = "col-sm-7">
+                @Html.DisplayFor(model => model.Location)
+            </dd>
+        </dl>
+        <div class="col-sm-3 mx-auto d-flex justify-content-between">
+            <a asp-action="Edit" asp-route-id="@Model?.VendorId">Edit</a>
+            <div class="d-flex flex-column">
+                <a asp-action="AdminIndex">Back to Admin Vendor List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
